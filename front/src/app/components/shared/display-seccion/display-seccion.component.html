@@ -1,0 +1,4 @@
+<h3 [innerHTML]="seccion.titulo"></h3>
+<div *ngFor="let objPregunta of seccion.objsPregunta; let i = index">
+	<app-display-obj-pregunta [objPregunta]="objPregunta" [displayNumero]="true" [i_padre]="i_padre + '-' + i"></app-display-obj-pregunta>
+</div>

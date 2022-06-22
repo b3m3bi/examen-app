@@ -1,0 +1,1 @@
+export const materias = ['Español','Matemáticas','Historia','Selecciona una materia'];

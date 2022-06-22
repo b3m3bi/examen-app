@@ -1,0 +1,14 @@
+<button (click)="irACapturaNuevaPregunta()">Agregar nueva pregunta</button>
+
+<div *ngFor="let objPregunta of objsPregunta; let i = index;" class="card">
+	<div class="card-header">
+		Materia: {{ objPregunta.materia }}
+	</div>
+	<div class="card-body">
+		<div>
+			<app-display-obj-pregunta [objPregunta]="objPregunta" [i_padre]="i.toString()"></app-display-obj-pregunta>
+			<button (click)="editarPregunta(objPregunta._id)">Editar</button>
+		</div>
+	</div>
+
+</div>

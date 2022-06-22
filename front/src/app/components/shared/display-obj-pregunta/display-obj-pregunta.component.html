@@ -1,0 +1,24 @@
+<div *ngIf="objPregunta.instruccionesCompartidas">
+	<ng-katex-html [html]="objPregunta.instruccionesCompartidas"></ng-katex-html> 
+</div>
+<div *ngIf="objPregunta.contenidoCompartido">
+	<ng-katex-html [html]="objPregunta.contenidoCompartido"></ng-katex-html>
+</div>
+<div *ngFor="let pregunta of objPregunta.preguntas; let i_pregunta = index">
+	<span *ngIf="displayNumero">{{ obtenerNumPergunta(pregunta) }}. </span>
+	<ng-katex-html [html]="pregunta.texto"></ng-katex-html>
+	<div *ngIf="pregunta.imgUrl" class="img-container">
+		<img [src]="pregunta.imgUrl" alt="">
+	</div>
+	<ol class="respuestas-list">
+		<div *ngFor="let respuesta of pregunta.respuestas; let i_respuesta = index">
+			<li>
+				<label for="respuesta-{{i_padre}}-{{i_pregunta}}-{{i_respuesta}}">
+					<input type="radio" id="respuesta-{{i_padre}}-{{i_pregunta}}-{{i_respuesta}}" name="respuesta-{{i_padre}}-{{i_pregunta}}">
+					<ng-katex-html [html]="respuesta.texto"></ng-katex-html>
+				</label>
+			</li>
+		</div>
+	</ol>
+	<!-- <button type="button">Borrar seleccion</button> -->
+</div>

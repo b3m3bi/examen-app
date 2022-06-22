@@ -1,0 +1,21 @@
+<table>
+	<thead>
+		<tr>
+			<th>Seleccionar</th>
+			<th>Materia</th>
+			<th>Número de preguntas</th>
+			<th>Pregunta</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let objPregunta of preguntasService.objsPregunta; let i = index">
+			<td><input type="checkbox" (click)="agregarASeleccion(objPregunta._id)"></td>
+			<td>{{ objPregunta.materia }}</td>
+			<td>{{ objPregunta.preguntas.length }}</td>
+			<td><ng-katex-html [html]="objPregunta.preguntas[0].texto"></ng-katex-html></td>
+		</tr>
+	</tbody>
+</table>
+
+
+<button (click)="agregarPreguntas( idsSeleccion )">Agregar preguntas al examen</button>

@@ -1,0 +1,1 @@
+!function(n){const i=n.af=n.af||{};i.dictionary=Object.assign(i.dictionary||{},{Bold:"Vetgedruk","Cannot upload file:":"Lêer nie opgelaai nie:",Italic:"Skuinsgedruk"}),i.getPluralForm=function(n){return 1!=n}}(window.CKEDITOR_TRANSLATIONS||(window.CKEDITOR_TRANSLATIONS={}));

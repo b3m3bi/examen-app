@@ -1,0 +1,28 @@
+<button (click)="crearNuevoExamen()">Agregar nuevo examen</button>
+<table>
+	<thead>
+		<tr>
+			<th>Seleccion</th>
+			<th>Número</th>
+			<th>Nombre</th>
+			<th>Número de secciones</th>
+			<th>Número de preguntas</th>
+			<th>Opciones</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let examen of examenes; let i = index">
+			<td>
+				<input type="checkbox">
+			</td>
+			<td>{{ i + 1 }}</td>
+			<td>{{ examen.nombre }}</td>
+			<td>{{ examen.secciones.length }}</td>
+			<td>{{ contarPreguntas(examen) }}</td>
+			<td>
+				<button (click)="irAEditarExamen(examen._id)">Editar</button>
+				<button (click)="irAVerExamen(examen._id)">Ver</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

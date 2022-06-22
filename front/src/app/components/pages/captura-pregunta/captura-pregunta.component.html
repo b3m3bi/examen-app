@@ -1,0 +1,59 @@
+<form #formulario="ngForm" (ngSubmit)="guardarObjPregunta(objPregunta)">
+	<div>
+		<label for="materia">Materia</label>
+		<select [(ngModel)]="objPregunta.materia" name="materia" id="materia">
+			<option *ngFor="let materia of materias" [value]="materia">{{ materia }}</option>
+		</select>
+	</div>
+	<div>
+		<label for="grupoPreguntas">
+			<input type="checkbox" [(ngModel)]="grupoPreguntas" name="grupoPreguntas" id="grupoPreguntas"> 
+			Grupo de preguntas
+		</label>
+	</div>
+	<div *ngIf="grupoPreguntas">
+		<label for="instruccionesCompartidas">Instrucciones compartidas del grupo de preguntas</label>
+		<ckeditor [editor]="Editor" [(ngModel)]="objPregunta.instruccionesCompartidas" name="instruccionesCompartidas" id="instruccionesCompartidas"></ckeditor>
+		<!-- <textarea [(ngModel)]="objPregunta.instruccionesCompartidas" id="instruccionesCompartidas" name="instruccionesCompartidas"></textarea> -->
+	</div>
+	<div *ngIf="grupoPreguntas">
+		<label for="contenidoCompartido">Contenido compartido del grupo de preguntas</label>
+		<ckeditor [editor]="Editor" [(ngModel)]="objPregunta.contenidoCompartido" name="contenidoCompartido" id="contenidoCompartido"></ckeditor>
+		<!-- <textarea [(ngModel)]="objPregunta.contenidoCompartido" name="contenidoCompartido" id="contenidoCompartido"></textarea> -->
+		<input type="file" name="imgCompartido" id="imgCompartido" (change)="uploadImg($event, objPregunta)">
+		<div *ngIf="objPregunta.imgUrl" class="imgContainer">
+			<img [src]='objPregunta.imgUrl' alt="">
+			<button type="button" (click)="deleteImg(objPregunta.imgUrl)">Borrar imagen</button>
+		</div>
+	</div>
+	<div *ngFor="let pregunta of objPregunta.preguntas; let i = index">
+		<label for="textoPregunta-{{i}}">Pregunta {{i + 1}}</label>
+		<ckeditor [editor]="Editor" [(ngModel)]="pregunta.texto" name="textoPregunta-{{i}}" id="textoPregunta-{{i}}"></ckeditor>
+		<!-- <textarea [(ngModel)]="pregunta.texto" name="textoPregunta-{{i}}" id="textoPregunta-{{i}}"></textarea> -->
+		<input type="file" name="imgPregunta" id="imgPregunta" (change)="uploadImg($event, pregunta )">
+		<div *ngIf="pregunta.imgUrl">
+			<img [src]='pregunta.imgUrl' alt="">
+			<button type="button" (click)="deleteImg(pregunta.imgUrl)">Borrar imagen</button>
+		</div>
+		<div *ngFor="let respuesta of pregunta.respuestas; let j = index">
+
+			<label for="respuesta-{{i}}-{{j}}">Respuesta {{j + 1}}</label>
+			<ckeditor [editor]="Editor" [(ngModel)]="respuesta.texto" name="respuesta-{{i}}-{{j}}" id="respuesta-{{i}}-{{j}}"></ckeditor>
+			<!-- <textarea [(ngModel)]="respuesta.texto" name="textoRespuesta-{{i}}-{{j}}" id="textoRespuesta-{{i}}-{{j}}"></textarea> -->
+			<label for="correcta-{{i}}-{{j}}">Correcta</label>
+			<input [(ngModel)]="respuesta.correcta" name="correcta-{{i}}-{{j}}" type="checkbox" id="correcta-{{i}}-{{j}}">
+			<input type="file" name="imgPregunta" id="imgPregunta" (change)="uploadImg($event, respuesta)">
+			<div *ngIf="respuesta.imgUrl">
+				<img [src]='respuesta.imgUrl' alt="">
+				<button type='button' (click)="deleteImg(respuesta.imgUrl)">Borrar imagen</button>
+			</div>
+			<button type="button" (click)="borrarRespuesta(i,j)">Borrar respuesta</button>
+		</div>
+		<button type="button" (click)="agregarRespuesta(i)">Agregar respuesta</button>
+		<button type="button" (click)="borrarPregunta(i)">Borrar pregunta</button>
+	</div>
+	<button *ngIf="grupoPreguntas" type="button" (click)="agregarPregunta()">Agregar pregunta</button>
+
+	<button type="submit">Guardar</button>
+	<button type="button" (click)="eliminarObjPregunta(objPregunta)">Eliminar objeto</button>
+</form>

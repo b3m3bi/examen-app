@@ -1,0 +1,5 @@
+<h2 [innerHTML]="examen.nombre"></h2>
+
+<div *ngFor="let seccion of examen.secciones; let i = index">
+	<app-display-seccion [seccion]="seccion" [i_padre]="i.toString()"></app-display-seccion>
+</div>

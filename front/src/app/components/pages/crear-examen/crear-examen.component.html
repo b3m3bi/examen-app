@@ -1,0 +1,29 @@
+{{ examen | json }}
+<form>
+	<div>
+		<label for="nombre-examen">Nombre examen</label>
+		<input type="text" id="nombre-examen" [(ngModel)]="examen.nombre" name="nombre">
+	</div>
+	<div *ngFor="let seccion of examen.secciones; let i = index">
+		<label for="titulo-seccion-{{i}}">Título de la sección</label>
+		<input type="text" id="titulo-seccion-{{i}}" [(ngModel)]="seccion.titulo" name="titulo-seccion-{{i}}">
+		<div *ngFor="let objPregunta of seccion.objsPregunta">
+			<div *ngFor="let pregunta of objPregunta.preguntas">
+				{{pregunta.texto}}
+			</div>
+		</div>
+		<button type="button" (click)="abrirModal( i )">Agregar pregunta del banco</button>
+		<button type="button">Agregar nueva pregunta</button>
+		<button type="button" (click)="borrarSeccion(i)">Borrar sección</button>
+	</div>
+	<button type="button" (click)="agregarSeccion()">Agregar sección</button>
+</form>
+
+<div class="modal" id="modal" (click)="cerrarModal($event)">
+	<div class="modal-content">
+		<app-obj-pregunta-select (seleccionPreguntasEvent)="agregarPreguntasASeccion( seccionEditada, $event)"></app-obj-pregunta-select>
+	</div>
+</div>
+
+<button (click)="guardarExamen()">Guardar</button>
+<button (click)="borrarExamen()">Borrar examen</button>

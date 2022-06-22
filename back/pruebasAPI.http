@@ -1,0 +1,5 @@
+GET http://localhost:3000/api/preguntas
+
+###
+
+GET http://localhost:3000/api/preguntas/60da645882c8362779c5a403
